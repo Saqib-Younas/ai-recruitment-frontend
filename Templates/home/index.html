@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Ai Recruiter - Aesthetic AI Hiring{% endblock %}
+
+{% block content %}
+<div class="relative overflow-hidden bg-white min-h-[90vh] flex items-center">
+    <!-- Soft Background Decor -->
+    <div class="absolute top-0 right-0 -mr-40 -mt-40 w-[600px] h-[600px] bg-blue-50 rounded-full blur-[120px] opacity-60"></div>
+    <div class="absolute bottom-0 left-0 -ml-40 -mb-40 w-[600px] h-[600px] bg-emerald-50 rounded-full blur-[120px] opacity-40"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            
+            <!-- Left Block (Overlap Fixed) -->
+            <div class="text-left space-y-10 animate-fade-in py-10">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-100 shadow-sm text-cyan-600 text-[10px] font-bold tracking-widest uppercase">
+                    <span class="flex gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    </span>
+                    AI-POWERED RECRUITING PLATFORM
+                </div>
+
+                <!-- Line height (leading) increased to fix overlap -->
+                <h1 class="text-6xl md:text-[88px] font-black text-slate-900 leading-[1] tracking-tight">
+                    AI-Powered <br>
+                    <div class="inline-block relative my-6">
+                        <!-- Aesthetic Block styling from Pic -->
+                        <span class="relative z-10 text-white gradient-bg px-10 py-5 rounded-[20px] italic shadow-2xl block md:inline-block leading-none">
+                            Hiring for Modern
+                        </span>
+                    </div> <br>
+                    Teams
+                </h1>
+
+                <p class="text-lg text-slate-500 max-w-lg leading-relaxed font-medium">
+                    Screen resumes, conduct smarter interviews, and hire the best talent faster with 
+                    <span class="gradient-text font-bold uppercase tracking-tighter">Ai Recruiter</span>.
+                </p>
+
+                <div class="flex flex-wrap gap-5 pt-4">
+                    <a href="{% url 'register' %}" class="px-10 py-4 rounded-full gradient-bg text-white font-bold shadow-2xl hover:scale-105 transition-all">
+                        Get Started Free
+                    </a>
+                    <a href="{% url 'contact' %}" class="px-10 py-4 rounded-full bg-white border border-slate-200 text-slate-900 font-bold flex items-center gap-2 hover:bg-slate-50 transition-all shadow-sm group">
+                        Book a Demo 
+                        <i class="fas fa-play text-[10px] text-cyan-500 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Block Mockup -->
+            <div class="relative hidden lg:flex justify-center items-center">
+                <div class="relative z-20 bg-white/90 backdrop-blur-xl rounded-[40px] shadow-[0_32px_64px_-16px_rgba(6,182,212,0.15)] border border-white p-10 w-[500px] aspect-square flex flex-col">
+                    <div class="flex justify-between items-center mb-10 text-[10px] font-black gradient-text uppercase tracking-widest">
+                        <span>Analysis Processing</span>
+                        <i class="fas fa-share-alt text-slate-300"></i>
+                    </div>
+
+                    <div class="flex-grow flex flex-col items-center justify-center">
+                        <div class="w-36 h-36 rounded-full gradient-bg flex items-center justify-center shadow-2xl mb-8 relative">
+                            <i class="fas fa-user-check text-white text-4xl"></i>
+                        </div>
+                        <div class="w-full max-w-xs bg-slate-100 h-2.5 rounded-full overflow-hidden mb-3">
+                            <div class="h-full gradient-bg w-[60%] shadow-lg"></div>
+                        </div>
+                        <div class="flex justify-between w-full max-w-xs text-[10px] font-black text-slate-400 uppercase">
+                            <span>Scanning CVs</span>
+                            <span class="text-cyan-600">60% Done</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-center gap-3 opacity-20">
+                         <div class="w-10 h-10 rounded-full bg-blue-200"></div>
+                         <div class="w-10 h-10 rounded-full bg-cyan-200"></div>
+                         <div class="w-10 h-10 rounded-full bg-emerald-200"></div>
+                    </div>
+                </div>
+
+                <!-- Floating Stats Card -->
+                <div class="absolute -bottom-10 -left-12 z-30 bg-white rounded-3xl shadow-2xl border border-slate-50 p-8 w-72 transform -rotate-2 hover:rotate-0 transition-all duration-500">
+                    <div class="flex items-center gap-2 mb-4">
+                         <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></div>
+                         <span class="text-[10px] font-black text-emerald-600 uppercase tracking-widest">AI MATCH SCORE</span>
+                    </div>
+                    <h4 class="text-base font-bold text-slate-900 mb-1">Top Candidate</h4>
+                    <div class="flex justify-between items-end mt-4">
+                        <span class="text-3xl font-black text-slate-800">96%</span>
+                        <div class="w-32 h-2 bg-slate-100 rounded-full overflow-hidden mb-2">
+                             <div class="h-full gradient-bg w-[96%]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Ai Recruiter - About Us{% endblock %}
+
+{% block content %}
+<section class="pt-32 pb-20 px-4 bg-white">
+    <div class="max-w-4xl mx-auto text-center mb-20">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-600 text-[10px] font-black tracking-widest uppercase mb-6">
+            Our Mission
+        </div>
+        <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6">
+            Who is <span class="gradient-text italic">Ai Recruiter</span> For?
+        </h2>
+        <p class="text-xl text-slate-500 leading-relaxed">
+            Built to support every stage of hiring, from fast-moving startups to scaling global enterprises.
+        </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+        <!-- Aesthetic Image/Graphic Block -->
+        <div class="relative group">
+            <div class="absolute -inset-4 gradient-bg rounded-[40px] blur-3xl opacity-10 group-hover:opacity-20 transition-opacity"></div>
+            <div class="relative rounded-[40px] overflow-hidden border border-slate-100 shadow-2xl bg-slate-50 aspect-video flex items-center justify-center">
+                <i class="fas fa-users text-9xl text-slate-200"></i>
+                <div class="absolute bottom-8 left-8 bg-white p-6 rounded-3xl shadow-2xl border border-slate-50 animate-bounce-slow">
+                    <div class="text-5xl font-black gradient-text">10x</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Faster Hiring Speed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="space-y-10">
+            <div class="flex gap-6 items-start">
+                <div class="w-14 h-14 shrink-0 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl shadow-sm">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div>
+                    <h4 class="font-black text-xl text-slate-800 mb-2">Fast Hiring for Startups</h4>
+                    <p class="text-slate-500 leading-relaxed font-medium">Quickly find top talent without needing a large HR team. Focus on growth while we handle the screening.</p>
+                </div>
+            </div>
+            <div class="flex gap-6 items-start">
+                <div class="w-14 h-14 shrink-0 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shadow-sm">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div>
+                    <h4 class="font-black text-xl text-slate-800 mb-2">Efficient HR Workflows</h4>
+                    <p class="text-slate-500 leading-relaxed font-medium">Manage thousands of applications effortlessly. Automate repetitive tasks and reduce bias with AI scoring.</p>
+                </div>
+            </div>
+            <div class="flex gap-6 items-start">
+                <div class="w-14 h-14 shrink-0 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl shadow-sm">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div>
+                    <h4 class="font-black text-xl text-slate-800 mb-2">Global Talent Access</h4>
+                    <p class="text-slate-500 leading-relaxed font-medium">Hire talent from anywhere in the world with remote-ready recruitment tools designed for modern teams.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

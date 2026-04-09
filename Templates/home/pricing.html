@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Ai Recruiter - Pricing Plans{% endblock %}
+
+{% block content %}
+<section class="pt-32 pb-24 px-4 bg-slate-50/50">
+    <div class="max-w-4xl mx-auto text-center mb-20">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-black tracking-widest uppercase mb-6">
+            Transparent Pricing
+        </div>
+        <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6">
+            Plans for Every <br><span class="gradient-text italic">Hiring Squad</span>
+        </h2>
+        <p class="text-xl text-slate-500 font-medium">No hidden fees. Choose the plan that scales with your business.</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 items-stretch">
+        <!-- Starter Plan -->
+        <div class="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm flex flex-col hover:shadow-xl transition-all group">
+            <h3 class="text-xl font-black text-slate-800 mb-2">Starter</h3>
+            <p class="text-sm text-slate-400 mb-8 font-medium">For small teams starting out.</p>
+            <div class="mb-10 flex items-baseline gap-1">
+                <span class="text-5xl font-black text-slate-900">$19</span>
+                <span class="text-slate-400 font-bold uppercase text-xs">/mo</span>
+            </div>
+            <button class="w-full py-4 rounded-2xl bg-slate-100 text-slate-900 font-black mb-10 hover:bg-slate-200 transition-colors">Get Started</button>
+            <ul class="space-y-5 text-slate-500 text-sm font-bold flex-grow">
+                <li><i class="fas fa-check-circle text-emerald-500 mr-3"></i> AI Resume Screening</li>
+                <li><i class="fas fa-check-circle text-emerald-500 mr-3"></i> Up to 100 Candidates</li>
+                <li><i class="fas fa-check-circle text-emerald-500 mr-3"></i> Basic Scoring</li>
+                <li><i class="fas fa-check-circle text-emerald-500 mr-3"></i> Email Support</li>
+            </ul>
+        </div>
+
+        <!-- Pro Plan (Highlighted) -->
+        <div class="bg-slate-900 p-10 rounded-[40px] border-4 border-cyan-400 shadow-2xl flex flex-col relative transform lg:scale-110 z-10">
+            <div class="absolute -top-5 left-1/2 -translate-x-1/2 gradient-bg px-6 py-1.5 rounded-full text-white text-[10px] font-black uppercase tracking-widest shadow-lg">Most Popular</div>
+            <h3 class="text-xl font-black text-white mb-2">Pro Plan</h3>
+            <p class="text-sm text-slate-400 mb-8 font-medium">Best for growing teams.</p>
+            <div class="mb-10 flex items-baseline gap-1">
+                <span class="text-5xl font-black text-white">$49</span>
+                <span class="text-slate-500 font-bold uppercase text-xs">/mo</span>
+            </div>
+            <button class="w-full py-4 rounded-2xl gradient-bg text-white font-black mb-10 shadow-xl shadow-cyan-500/20 hover:scale-[1.02] transition-transform">Start Free Trial</button>
+            <ul class="space-y-5 text-slate-300 text-sm font-bold flex-grow">
+                <li><i class="fas fa-check-circle text-cyan-400 mr-3"></i> Advanced AI Matching</li>
+                <li><i class="fas fa-check-circle text-cyan-400 mr-3"></i> Unlimited Candidates</li>
+                <li><i class="fas fa-check-circle text-cyan-400 mr-3"></i> AI Interview Assistant</li>
+                <li><i class="fas fa-check-circle text-cyan-400 mr-3"></i> Priority Support</li>
+                <li><i class="fas fa-check-circle text-cyan-400 mr-3"></i> Analytics Dashboard</li>
+            </ul>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm flex flex-col hover:shadow-xl transition-all group">
+            <h3 class="text-xl font-black text-slate-800 mb-2">Enterprise</h3>
+            <p class="text-sm text-slate-400 mb-8 font-medium">Custom tailored solutions.</p>
+            <div class="mb-10 flex items-baseline gap-1">
+                <span class="text-5xl font-black text-slate-900">Custom</span>
+            </div>
+            <button class="w-full py-4 rounded-2xl bg-slate-100 text-slate-900 font-black mb-10 hover:bg-slate-200 transition-colors">Contact Sales</button>
+            <ul class="space-y-5 text-slate-500 text-sm font-bold flex-grow">
+                <li><i class="fas fa-check-circle text-emerald-500 mr-3"></i> Custom AI Models</li>
+                <li><i class="fas fa-check-circle text-emerald-500 mr-3"></i> Dedicated Account Manager</li>
+                <li><i class="fas fa-check-circle text-emerald-500 mr-3"></i> API & Integrations</li>
+                <li><i class="fas fa-check-circle text-emerald-500 mr-3"></i> 24/7 Premium Support</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

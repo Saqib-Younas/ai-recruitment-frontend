@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ai Recruiter - Modern Hiring Platform{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Signature Blue-Cyan-Emerald Gradient */
+        .gradient-text {
+            background: linear-gradient(to right, #2563eb, #06b6d4, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(to bottom right, #2563eb, #06b6d4, #10b981);
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .nav-link:hover {
+            color: #06b6d4;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: #10b981;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #mobile-menu.active {
+            max-height: 600px;
+            opacity: 1;
+            padding: 2rem 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-white font-sans text-slate-900 flex flex-col min-h-screen">
+
+    <!-- Header / Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo (Linked to Home) -->
+                <a href="{% url 'home' %}" class="flex items-center gap-4 group">
+                    <div class="w-16 h-16 group-hover:scale-110 transition-transform flex items-center justify-center">
+                        <img src="{% static 'images/logo.svg' %}" alt="Logo" class="w-full h-full object-contain" 
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/64x64/2563eb/ffffff?text=AR'">
+                    </div>
+                    <span class="text-2xl font-black gradient-text tracking-tighter uppercase">Ai Recruiter</span>
+                </a>
+
+                <!-- Desktop Menu (Links Fixed) -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'home' %}" class="nav-link">Home</a>
+                    <a href="{% url 'about' %}" class="nav-link">About</a>
+                    <a href="{% url 'pricing' %}" class="nav-link">Pricing</a>
+                    <a href="{% url 'contact' %}" class="nav-link">Contact</a>
+                    
+                    {% if user.is_authenticated %}
+                       <!-- User Login hai toh uska naam aur Logout button -->
+                       <div class="flex items-center gap-4 border-l pl-6 border-slate-200">
+                           <span class="text-sm font-bold gradient-text">Hello, {{ user.first_name }}</span>
+                                 <a href="{% url 'logout' %}" class="text-xs font-bold text-red-500 hover:underline">Logout</a>
+                       </div>
+                    {% else %}
+                       <!-- User Login nahi hai toh Get Started dikhao -->
+                       <a href="{% url 'register' %}" class="px-7 py-3 rounded-full bg-slate-900 text-white font-bold hover:bg-slate-800 shadow-lg">
+                         Get Started
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-slate-900 p-2"><i id="menu-icon" class="fas fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Links Fixed) -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t border-slate-100 space-y-4 shadow-xl">
+            <a href="{% url 'home' %}" class="block text-lg font-bold text-slate-700 py-2">Home</a>
+            <a href="{% url 'about' %}" class="block text-lg font-bold text-slate-700 py-2">About</a>
+            <a href="{% url 'pricing' %}" class="block text-lg font-bold text-slate-700 py-2">Pricing</a>
+            <a href="{% url 'contact' %}" class="block text-lg font-bold text-slate-700 py-2">Contact</a>
+            <a href="{% url 'register' %}" class="block w-full text-center py-4 rounded-xl gradient-bg text-white font-bold">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Block -->
+    <main class="flex-grow pt-20">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer (Links Fixed) -->
+    <footer class="bg-[#0f172a] text-slate-400 py-16 mt-auto">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid lg:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1">
+                    <span class="text-2xl font-black text-white tracking-tighter">Ai Recruiter</span>
+                    <p class="mt-4 text-sm leading-relaxed">Duniya ka behtareen AI tool jo aapki hiring ko asan aur fast banata hai.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Platform</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="{% url 'home' %}" class="hover:text-cyan-400 transition-colors">Features</a></li>
+                        <li><a href="{% url 'pricing' %}" class="hover:text-cyan-400 transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Company</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="{% url 'about' %}" class="hover:text-cyan-400 transition-colors">About</a></li>
+                        <li><a href="{% url 'contact' %}" class="hover:text-cyan-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Newsletter</h4>
+                    <div class="flex gap-2 p-1 bg-slate-800 rounded-lg">
+                        <input type="email" placeholder="Email" class="bg-transparent border-none px-3 py-2 text-sm w-full outline-none text-white focus:ring-0">
+                        <button class="gradient-bg text-white px-4 rounded-md shadow-md"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-800 text-center text-xs">
+                © 2026 Ai Recruiter Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            if (menu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -53,7 +53,7 @@ def register_view(request):
         except Exception as e:
             messages.error(request, f"Registration crash hui: {str(e)}")
 
-    return render(request, 'accounts/register.html')
+    return render(request, 'accounts/signup.html')
 
 def login_view(request):
     if request.method == 'POST':

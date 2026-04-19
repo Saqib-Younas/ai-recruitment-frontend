@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ai Recruiter - Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    /* Sidebar Icons Styling */
+    .sidebar-icon {
+        @apply w-12 h-12 flex items-center justify-center rounded-2xl transition-all duration-300 cursor-pointer;
+    }
+    
+    /* Image ke mutabiq soft aur deep shadow blocks ke liye */
+    .block-shadow {
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Stats Card Design matching the reference image */
+    .stat-card {
+        @apply bg-white p-6 rounded-[32px] border border-slate-50 block-shadow flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:shadow-slate-200/50;
+        min-height: 180px;
+    }
+
+    /* Fixed Sidebar Layout - Adjusting Z-Index to avoid overlap */
+    .fixed-sidebar {
+        @apply w-24 bg-white border-r border-slate-100 flex flex-col items-center py-8 gap-8 fixed left-0 hidden md:flex;
+        top: 80px; /* Header height */
+        height: calc(100vh - 80px);
+        z-index: 30; /* Header (100) aur Footer (90) se niche */
+    }
+
+    .sidebar-active {
+        @apply bg-violet-600 text-white shadow-lg shadow-violet-200;
+    }
+</style>
+
+<div class="min-h-screen bg-[#F8F9FD] flex">
+    
+    <!-- Sidebar Navigation - Fixed and Layered correctly -->
+    <aside class="fixed-sidebar">
+        <div class="sidebar-icon sidebar-active">
+            <i class="fas fa-th-large text-xl"></i>
+        </div>
+        <div class="sidebar-icon text-slate-300 hover:text-slate-600 hover:bg-slate-50">
+            <i class="fas fa-users text-xl"></i>
+        </div>
+        <div class="sidebar-icon text-slate-300 hover:text-slate-600 hover:bg-slate-50">
+            <i class="fas fa-phone text-xl"></i>
+        </div>
+        <div class="sidebar-icon text-slate-300 hover:text-slate-600 hover:bg-slate-50">
+            <i class="fas fa-file-alt text-xl"></i>
+        </div>
+        <div class="sidebar-icon text-slate-300 hover:text-slate-600 hover:bg-slate-50">
+            <i class="fas fa-briefcase text-xl"></i>
+        </div>
+        <div class="sidebar-icon text-slate-300 hover:text-slate-600 hover:bg-slate-50">
+            <i class="fas fa-chart-line text-xl"></i>
+        </div>
+        <div class="mt-auto sidebar-icon text-slate-300 hover:text-slate-600 hover:bg-slate-50">
+            <i class="fas fa-cog text-xl"></i>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 md:ml-24 p-8">
+        
+        <!-- Welcome Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+            <div>
+                <h1 class="text-3xl font-black text-slate-800">Good Morning {{ first_name }}</h1>
+                <p class="text-slate-400 text-sm font-medium mt-1 uppercase tracking-widest">Here is the current status for today</p>
+            </div>
+            <div class="relative w-full md:w-96">
+                <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 text-sm"></i>
+                <input type="text" placeholder="Search Anything Here..." class="w-full pl-14 pr-6 py-4 bg-white rounded-2xl border-none shadow-sm outline-none focus:ring-2 focus:ring-violet-100 text-sm font-medium">
+            </div>
+        </div>
+
+        <!-- 3 Stats Blocks - Shadow Type Design from Pic -->
+        <div class="grid md:grid-cols-3 gap-8 mb-10">
+            <!-- Total Applicants Block -->
+            <div class="stat-card">
+                <div class="flex justify-between items-start">
+                    <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-500">
+                        <i class="fas fa-user-plus text-xl"></i>
+                    </div>
+                    <button class="text-slate-200 hover:text-slate-400"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Total Applicants</p>
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl font-black text-slate-800">+{{ applicants }}</span>
+                        <span class="text-[10px] font-black px-2 py-1 bg-emerald-50 text-emerald-500 rounded-lg flex items-center gap-1">
+                            <i class="fas fa-arrow-up"></i> 40%
+                        </span>
+                    </div>
+                    <p class="text-[10px] font-bold text-slate-300 mt-2 uppercase">VS Last Month</p>
+                </div>
+            </div>
+
+            <!-- Total Email Block -->
+            <div class="stat-card">
+                <div class="flex justify-between items-start">
+                    <div class="w-12 h-12 bg-violet-50 rounded-2xl flex items-center justify-center text-violet-500">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <button class="text-slate-200 hover:text-slate-400"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Total Email</p>
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl font-black text-slate-800">+{{ emails }}</span>
+                        <span class="text-[10px] font-black px-2 py-1 bg-red-50 text-red-500 rounded-lg flex items-center gap-1">
+                            <i class="fas fa-arrow-down"></i> 20%
+                        </span>
+                    </div>
+                    <p class="text-[10px] font-bold text-slate-300 mt-2 uppercase">VS Last Month</p>
+                </div>
+            </div>
+
+            <!-- Total Job Offers Block -->
+            <div class="stat-card">
+                <div class="flex justify-between items-start">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-500">
+                        <i class="fas fa-briefcase text-xl"></i>
+                    </div>
+                    <button class="text-slate-200 hover:text-slate-400"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Total Job Offers</p>
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl font-black text-slate-800">+{{ job_offers }}</span>
+                        <span class="text-[10px] font-black px-2 py-1 bg-emerald-50 text-emerald-500 rounded-lg flex items-center gap-1">
+                            <i class="fas fa-arrow-up"></i> 50%
+                        </span>
+                    </div>
+                    <p class="text-[10px] font-bold text-slate-300 mt-2 uppercase">VS Last Month</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vacancy Statistics Section -->
+        <div class="bg-white p-10 rounded-[40px] border border-slate-50 block-shadow mb-10 relative overflow-hidden">
+            <div class="flex justify-between items-center mb-12">
+                <h3 class="text-xl font-black text-slate-800 uppercase tracking-tighter">Vacancy Statistics</h3>
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-violet-600"></span>
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Application Sent</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-orange-500"></span>
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Interviewed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-end h-64 px-4 border-b border-slate-100 pb-2">
+                {% for month in months %}
+                <div class="flex flex-col items-center gap-4 group cursor-pointer w-full max-w-[40px]">
+                    <div class="flex flex-col items-center gap-1 w-full">
+                        <div class="w-full bg-violet-100 rounded-full group-hover:bg-violet-600 transition-all duration-500" style="height: 40px;"></div>
+                        <div class="w-full bg-orange-100 rounded-full group-hover:bg-orange-500 transition-all duration-500" style="height: 20px;"></div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-300 uppercase">{{ month }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Top Candidates Table Section -->
+        <div class="bg-white p-8 rounded-[40px] border border-slate-50 block-shadow">
+            <h3 class="text-xl font-black text-slate-800 uppercase tracking-tighter mb-8 px-4">Top Candidates</h3>
+            <div class="overflow-x-auto px-4">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-50">
+                            <th class="py-6 pr-6">Candidate Name</th>
+                            <th class="py-6 px-6">ID</th>
+                            <th class="py-6 pl-6">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm font-bold text-slate-600">
+                        {% for c in candidates %}
+                        <tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
+                            <td class="py-6 pr-6 flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+                                    <img src="https://ui-avatars.com/api/?name={{ c.name }}&background=random" alt="User">
+                                </div>
+                                <span class="text-slate-800 font-bold">{{ c.name }}</span>
+                            </td>
+                            <td class="py-6 px-6 text-slate-400 font-medium">{{ c.id }}</td>
+                            <td class="py-6 pl-6 font-medium text-slate-500">{{ c.email }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

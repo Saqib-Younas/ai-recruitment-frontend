@@ -1,203 +1,178 @@
-{% load static %}
+{% extends 'base.html' %} <!-- Hamesha Line 1 par -->
+      {% load static %}
 <!doctype html>
+{% block content %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ai Recruiter - Create Business Account</title>
+    <title>Ai Recruiter - Signup</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <style>
-      .gradient-text {
-        background: linear-gradient(to right, #2563eb, #06b6d4, #10b981);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+      .gradient-text { background: linear-gradient(to right, #2563eb, #06b6d4, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .gradient-bg { background: linear-gradient(to bottom right, #2563eb, #06b6d4, #10b981); }
+      
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
-      .gradient-bg {
-        background: linear-gradient(to bottom right, #2563eb, #06b6d4, #10b981);
+
+      .floating-anim {
+        animation: floating 3s ease-in-out infinite;
       }
-      input:focus,
-      select:focus {
+      @keyframes floating {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+
+      input:focus {
         border-color: #06b6d4;
-        ring: 4px;
-        ring-color: rgba(6, 182, 212, 0.1);
+        box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.1);
       }
     </style>
   </head>
-  <body class="bg-slate-50 font-sans text-slate-900 min-h-screen">
-    <!-- Aesthetic Header for Register -->
-    <nav
-      class="w-full bg-white/80 backdrop-blur-md border-b border-slate-100 py-3 px-8 flex justify-between items-center fixed top-0 z-50"
-    >
-      <a href="{% url 'home' %}" class="flex items-center gap-3 group">
-        <!-- Logo size decreased to w-12 h-12 -->
-        <div
-          class="w-12 h-12 group-hover:scale-110 transition-transform flex items-center justify-center"
-        >
-          <img
-            src="{% static 'images/logo.svg' %}"
-            alt="Logo"
-            class="w-full h-full object-contain"
-            onerror="
-              this.src =
-                'https://via.placeholder.com/48x48/2563eb/ffffff?text=AR'
-            "
-          />
-        </div>
-        <!-- Brand text decreased to text-2xl for balance -->
-        <span
-          class="text-2xl font-black gradient-text tracking-tighter uppercase leading-none"
-          >Ai Recruiter</span
-        >
-      </a>
-      <div class="flex items-center gap-4">
-        <span
-          class="hidden sm:inline text-sm font-medium text-slate-400 uppercase tracking-widest"
-          >Already a member?</span
-        >
-        <a
-          href="{% url 'login' %}"
-          class="secondary-btn px-6 py-2.5 rounded-full border border-slate-200 text-sm font-bold text-slate-700 shadow-sm flex items-center gap-2 hover:border-cyan-400 hover:text-cyan-600"
-        >
-          Login <i class="fas fa-arrow-right text-[10px]"></i>
-        </a>
-      </div>
-    </nav>
-
+  <body class="bg-slate-50 font-sans text-slate-900 min-h-screen selection:bg-cyan-100">
+    
+    <!-- Sleek Compact Header -->
+    
     <div class="flex items-center justify-center pt-32 pb-20 px-4">
-      <div
-        class="max-w-5xl w-full bg-white rounded-[48px] shadow-2xl overflow-hidden border border-slate-100 flex flex-col md:flex-row"
-      >
-        <!-- Sidebar Branding -->
-        <div
-          class="md:w-1/2 gradient-bg p-12 text-white flex flex-col justify-center relative"
-        >
- 
-          <div class="relative z-10">
-            <div
-              class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-3xl flex items-center justify-center mb-8 shadow-xl"
-            >
-              <i class="fas fa-rocket text-4xl"></i>
+      <div class="max-w-6xl w-full glass-card rounded-[48px] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col md:flex-row">
+        
+        <!-- Left Side Branding Section -->
+        <div class="md:w-5/12 gradient-bg p-12 text-white flex flex-col justify-between relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-emerald-300/20 rounded-full -ml-24 -mb-24 blur-2xl"></div>
+
+            <div class="relative z-10">
+                <div class="w-20 h-20 bg-white/20 backdrop-blur-lg rounded-3xl flex items-center justify-center mb-10 shadow-2xl floating-anim">
+                  <i class="fas fa-rocket text-4xl"></i>
+                </div>
+                <h2 class="text-4xl font-black mb-6 leading-[1.1] tracking-tight text-white">Join the Future of <br>AI Recruitment</h2>
+                <p class="text-white/80 text-lg font-medium leading-relaxed mb-12">
+                  Join 5,000+ companies hiring faster and smarter with our advanced recruiter automation tools.
+                </p>
+
+                <div class="space-y-6">
+                  <div class="flex items-center gap-4 group">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <i class="fas fa-check text-emerald-300"></i>
+                    </div>
+                    <span class="font-bold text-sm">Automated Resume Screening</span>
+                  </div>
+                  <div class="flex items-center gap-4 group">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <i class="fas fa-check text-emerald-300"></i>
+                    </div>
+                    <span class="font-bold text-sm">Smart Candidate Scoring</span>
+                  </div>
+                  <div class="flex items-center gap-4 group">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <i class="fas fa-check text-emerald-300"></i>
+                    </div>
+                    <span class="font-bold text-sm">24/7 Support for Your Team</span>
+                  </div>
+                </div>
             </div>
-            <h2 class="text-2xl font-black mb-6 leading-tight">
-              Scale Your Hiring with AI
-            </h2>
-            <p class="text-white/80 text-lg ">
-              Join modern teams hiring faster and smarter with advanced AI
-              tools.
-            </p>
-          </div>
+
+            <div class="relative z-10 pt-12 border-t border-white/10 mt-12">
+              <div class="flex -space-x-3 mb-4">
+                <div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-emerald-500 shadow-lg"></div>
+                <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-emerald-500 shadow-lg"></div>
+                <div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-emerald-500 shadow-lg"></div>
+              </div>
+              <p class="text-xs font-bold text-emerald-100 uppercase tracking-widest">Trusted by top HR squads</p>
+            </div>
         </div>
 
-        <!-- Multi-field Form -->
-        <div class="md:w-2/3 p-12">
-          <h1 class="text-3xl font-black text-slate-900 mb-2">
-            Create Account
-          </h1>
+        <!-- Right Side Form Section -->
+        <div class="md:w-7/12 p-10 md:p-16 bg-white relative">
+          <div class="mb-10">
+            <h1 class="text-4xl font-black text-slate-900 mb-2 uppercase tracking-tight">Create Account</h1>
+            <p class="text-slate-400 font-medium">Please enter your details to start your 14-day free trial.</p>
+          </div>
 
           <form method="POST" class="space-y-6">
             {% csrf_token %}
 
             <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
-                >
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  name="first_name"
-                  required
-                  class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white transition-all"
-                  placeholder="John"
-                />
+              <div class="space-y-2">
+                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">First Name</label>
+                <!-- value="{{ first_name }}" ensures data stays even if there is an error -->
+                <input type="text" name="first_name" value="{{ first_name|default:'' }}" required 
+                       class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all font-medium" 
+                       placeholder="John" />
               </div>
 
-              <div>
-                <label
-                  class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
-                >
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  name="last_name"
-                  required
-                  class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white transition-all"
-                  placeholder="Doe"
-                />
+              <div class="space-y-2">
+                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Last Name</label>
+                <input type="text" name="last_name" value="{{ last_name|default:'' }}" required 
+                       class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all font-medium" 
+                       placeholder="Doe" />
               </div>
             </div>
 
-            <div>
-              <label
-                class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
-              >
-                Work Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                required
-                class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white transition-all"
-                placeholder="john@company.com"
-              />
+            <div class="space-y-2">
+              <label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Work Email</label>
+              <input type="email" name="email" value="{{ email|default:'' }}" required 
+                     class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all font-medium" 
+                     placeholder="john@company.com" />
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  required
-                  class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white transition-all"
-                />
+              <div class="space-y-2">
+                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Password</label>
+                <div class="relative">
+                  <input type="password" name="password" required 
+                         class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all font-medium" 
+                         placeholder="••••••••" />
+                </div>
               </div>
 
-              <div>
-                <label
-                  class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  name="confirm_password"
-                  required
-                  class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white transition-all"
-                />
+              <div class="space-y-2">
+                <label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Confirm Password</label>
+                <div class="relative">
+                  <input type="password" name="confirm_password" required 
+                         class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm outline-none focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all font-medium" 
+                         placeholder="••••••••" />
+                </div>
               </div>
             </div>
 
             <div class="flex items-center gap-3 py-3 px-1">
-              <input
-                type="checkbox"
-                required
-                class="w-5 h-5 rounded-lg text-blue-600 border-slate-200"
-              />
-              <label class="text-xs text-slate-500 font-medium">
-                I agree to Terms & Privacy Policy
+              <div class="relative flex items-center">
+                <input type="checkbox" id="terms" required 
+                       class="w-5 h-5 rounded-lg border-slate-200 text-blue-600 focus:ring-0 cursor-pointer transition-all" />
+              </div>
+              <label for="terms" class="text-xs text-slate-500 font-bold uppercase tracking-tight cursor-pointer">
+                I agree to the <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> & <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
               </label>
             </div>
 
-            <button
-              type="submit"
-              class="w-full py-5 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black text-xl shadow-xl hover:scale-[1.02] active:scale-95 transition-all mt-4"
-            >
-              Signup
+            <button type="submit" class="w-full py-5 rounded-3xl gradient-bg text-white font-black text-xl shadow-[0_20px_40px_-10px_rgba(37,99,235,0.4)] hover:scale-[1.01] hover:shadow-[0_25px_50px_-12px_rgba(37,99,235,0.5)] active:scale-95 transition-all mt-4">
+              Sign up and Continue <i class="fas fa-rocket ml-2 text-sm opacity-50"></i>
             </button>
+
+            <div class="text-center mt-10">
+              <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.3em]">Secure AES-256 Encryption</p>
+            </div>
+            <div class="text-center pt-8 border-t border-slate-50 mt-8">
+             <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                Already have an account? 
+                <a href="{% url 'login' %}" class="ml-2 text-cyan-600 hover:text-blue-600 transition-colors underline decoration-2 decoration-cyan-100 underline-offset-4 font-black">Log in here</a>
+             </p>
+            </div>
           </form>
         </div>
       </div>
     </div>
+
+    <!-- Background Decoration -->
+    <div class="fixed top-0 right-0 -z-10 w-[500px] h-[500px] bg-blue-50 rounded-full blur-[120px] opacity-40"></div>
+    <div class="fixed bottom-0 left-0 -z-10 w-[500px] h-[500px] bg-emerald-50 rounded-full blur-[120px] opacity-40"></div>
+
   </body>
 </html>
+{% endblock %}

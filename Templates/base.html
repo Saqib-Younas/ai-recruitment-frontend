@@ -4,152 +4,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Ai Recruiter - Modern Hiring Platform{% endblock %}</title>
+    <title>{% block title %}Ai Recruiter - Smart Hiring Platform{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Signature Blue-Cyan-Emerald Gradient */
-        .gradient-text {
-            background: linear-gradient(to right, #2563eb, #06b6d4, #10b981);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gradient-bg {
-            background: linear-gradient(to bottom right, #2563eb, #06b6d4, #10b981);
-        }
-        .nav-link {
-            transition: all 0.3s ease;
-            position: relative;
-            font-weight: 700;
-            color: #1e293b;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .nav-link:hover {
-            color: #06b6d4;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background: #10b981;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
+        .gradient-text { background: linear-gradient(to right, #2563eb, #06b6d4, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-bg { background: linear-gradient(to bottom right, #2563eb, #06b6d4, #10b981); }
+        .nav-link { transition: all 0.3s ease; position: relative; font-weight: 700; color: #1e293b; font-size: 1rem; text-transform: uppercase; }
+        .nav-link:hover { color: #06b6d4; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #10b981; transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
         
-        #mobile-menu {
-            transition: all 0.3s ease-in-out;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-        }
-        #mobile-menu.active {
-            max-height: 600px;
-            opacity: 1;
-            padding: 2rem 1.5rem;
-        }
+        /* Toast Animation */
+        .toast-notification { animation: slideIn 0.5s ease-out forwards; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        #mobile-menu { transition: all 0.3s ease-in-out; max-height: 0; overflow: hidden; opacity: 0; }
+        #mobile-menu.active { max-height: 600px; opacity: 1; padding: 2rem 1.5rem; }
     </style>
 </head>
-<body class="bg-white font-sans text-slate-900 flex flex-col min-h-screen">
+<body class="bg-slate-50 font-sans text-slate-900 flex flex-col min-h-screen">
 
-    <!-- Header / Navbar -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <!-- Logo (Linked to Home) -->
-                <a href="{% url 'home' %}" class="flex items-center gap-4 group">
-                    <div class="w-16 h-16 group-hover:scale-110 transition-transform flex items-center justify-center">
-                        <img src="{% static 'images/logo.svg' %}" alt="Logo" class="w-full h-full object-contain" 
-                             onerror="this.onerror=null; this.src='https://via.placeholder.com/64x64/2563eb/ffffff?text=AR'">
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="fixed top-24 right-5 z-[100] flex flex-col gap-3 pointer-events-none">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="toast-notification pointer-events-auto min-w-[320px] p-5 rounded-2xl shadow-2xl border flex items-center gap-4 
+                    {% if message.tags == 'success' %} bg-emerald-50 border-emerald-100 text-emerald-800 {% elif message.tags == 'error' %} bg-red-50 border-red-100 text-red-800 {% else %} bg-blue-50 border-blue-100 text-blue-800 {% endif %}">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center 
+                        {% if message.tags == 'success' %} bg-emerald-500 {% elif message.tags == 'error' %} bg-red-500 {% else %} bg-blue-500 {% endif %} text-white shadow-lg">
+                        <i class="fas {% if message.tags == 'success' %} fa-check {% elif message.tags == 'error' %} fa-exclamation {% else %} fa-info {% endif %}"></i>
                     </div>
-                    <span class="text-2xl font-black gradient-text tracking-tighter uppercase">Ai Recruiter</span>
+                    <div class="flex-1">
+                        <p class="text-[10px] font-black uppercase tracking-widest opacity-50">{{ message.tags }}</p>
+                        <p class="text-sm font-bold leading-tight">{{ message }}</p>
+                    </div>
+                    <button onclick="this.parentElement.remove()" class="opacity-40 hover:opacity-100 transition-opacity"><i class="fas fa-times"></i></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="flex justify-between h-32 items-center">
+                <!-- Logo & Brand -->
+                <a href="{% url 'home' %}" class="flex items-center gap-6 group">
+                    <div class="w-24 h-24 group-hover:scale-110 transition-transform flex items-center justify-center">
+                        <img src="{% static 'images/logo.svg' %}" alt="Logo" class="w-full h-full object-contain" 
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/100x100/2563eb/ffffff?text=AR'">
+                    </div>
+                    <span class="text-5xl font-black gradient-text tracking-tighter uppercase leading-none">Ai Recruiter</span>
                 </a>
 
-                <!-- Desktop Menu (Links Fixed) -->
-                <div class="hidden md:flex items-center space-x-8">
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-12">
                     <a href="{% url 'home' %}" class="nav-link">Home</a>
                     <a href="{% url 'about' %}" class="nav-link">About</a>
                     <a href="{% url 'pricing' %}" class="nav-link">Pricing</a>
                     <a href="{% url 'contact' %}" class="nav-link">Contact</a>
-                    
                     {% if user.is_authenticated %}
-                       <!-- User Login hai toh uska naam aur Logout button -->
-                       <div class="flex items-center gap-4 border-l pl-6 border-slate-200">
-                           <span class="text-sm font-bold gradient-text">Hello, {{ user.first_name }}</span>
-                                 <a href="{% url 'logout' %}" class="text-xs font-bold text-red-500 hover:underline">Logout</a>
-                       </div>
+                        <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+                        <div class="flex items-center gap-6 border-l pl-8 border-slate-200">
+                            <div class="text-right">
+                                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Logged in as</p>
+                                <p class="text-lg font-bold gradient-text italic leading-none">{{ user.first_name }}</p>
+                            </div>
+                            <a href="{% url 'logout' %}" class="px-6 py-2.5 rounded-full border-2 border-red-100 text-xs font-black text-red-500 uppercase hover:bg-red-50 transition-all">Logout</a>
+                        </div>
                     {% else %}
-                       <!-- User Login nahi hai toh Get Started dikhao -->
-                       <a href="{% url 'signup' %}" class="px-7 py-3 rounded-full bg-slate-900 text-white font-bold hover:bg-slate-800 shadow-lg">
-                         Get Started
-                        </a>
+                        <a href="{% url 'signup' %}" class="px-10 py-5 rounded-full bg-slate-900 text-white font-black text-lg hover:bg-slate-800 shadow-xl transition-all hover:-translate-y-1 active:scale-95">Get Started</a>
                     {% endif %}
                 </div>
 
                 <div class="md:hidden">
-                    <button id="menu-btn" class="text-slate-900 p-2"><i id="menu-icon" class="fas fa-bars text-xl"></i></button>
+                    <button id="menu-btn" class="text-slate-900 p-2"><i id="menu-icon" class="fas fa-bars text-3xl"></i></button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu (Links Fixed) -->
-        <div id="mobile-menu" class="md:hidden bg-white border-t border-slate-100 space-y-4 shadow-xl">
-            <a href="{% url 'home' %}" class="block text-lg font-bold text-slate-700 py-2">Home</a>
-            <a href="{% url 'about' %}" class="block text-lg font-bold text-slate-700 py-2">About</a>
-            <a href="{% url 'pricing' %}" class="block text-lg font-bold text-slate-700 py-2">Pricing</a>
-            <a href="{% url 'contact' %}" class="block text-lg font-bold text-slate-700 py-2">Contact</a>
-            <a href="{% url 'register' %}" class="block w-full text-center py-4 rounded-xl gradient-bg text-white font-bold">Get Started</a>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t border-slate-100 space-y-4 shadow-2xl">
+            <a href="{% url 'home' %}" class="block text-xl font-bold py-4 px-6 border-b border-slate-50">Home</a>
+            <a href="{% url 'about' %}" class="block text-xl font-bold py-4 px-6 border-b border-slate-50">About</a>
+            <a href="{% url 'pricing' %}" class="block text-xl font-bold py-4 px-6 border-b border-slate-50">Pricing</a>
+            <a href="{% url 'contact' %}" class="block text-xl font-bold py-4 px-6 border-b border-slate-50">Contact</a>
+            {% if user.is_authenticated %}
+                <div class="px-6 py-4 bg-slate-50 rounded-xl mx-4">
+                    <p class="text-sm font-bold text-slate-400">Hi, {{ user.first_name }}</p>
+                    <a href="{% url 'logout' %}" class="block text-lg font-bold text-red-500 mt-2">Logout</a>
+                </div>
+            {% else %}
+                <a href="{% url 'signup' %}" class="block w-full text-center py-6 rounded-2xl gradient-bg text-white font-black text-xl">Get Started</a>
+            {% endif %}
         </div>
     </nav>
 
-    <!-- Main Content Block -->
-    <main class="flex-grow pt-20">
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-32">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer (Links Fixed) -->
+    <!-- Footer -->
     <footer class="bg-[#0f172a] text-slate-400 py-16 mt-auto">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid lg:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1">
-                    <span class="text-2xl font-black text-white tracking-tighter">Ai Recruiter</span>
-                    <p class="mt-4 text-sm leading-relaxed">Duniya ka behtareen AI tool jo aapki hiring ko asan aur fast banata hai.</p>
+                    <span class="text-2xl font-black text-white tracking-tighter uppercase">Ai Recruiter</span>
+                    <p class="mt-4 text-sm leading-relaxed">The world's best AI tool making your hiring process easier and faster for modern squads.</p>
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:text-cyan-400 transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:text-cyan-400 transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Platform</h4>
-                    <ul class="space-y-4 text-sm">
+                    <ul class="space-y-4 text-sm font-medium">
                         <li><a href="{% url 'home' %}" class="hover:text-cyan-400 transition-colors">Features</a></li>
                         <li><a href="{% url 'pricing' %}" class="hover:text-cyan-400 transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Integrations</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Company</h4>
-                    <ul class="space-y-4 text-sm">
-                        <li><a href="{% url 'about' %}" class="hover:text-cyan-400 transition-colors">About</a></li>
-                        <li><a href="{% url 'contact' %}" class="hover:text-cyan-400 transition-colors">Contact</a></li>
+                    <ul class="space-y-4 text-sm font-medium">
+                        <li><a href="{% url 'about' %}" class="hover:text-cyan-400 transition-colors">About Us</a></li>
+                        <li><a href="{% url 'contact' %}" class="hover:text-cyan-400 transition-colors">Contact Support</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-widest">Newsletter</h4>
-                    <div class="flex gap-2 p-1 bg-slate-800 rounded-lg">
-                        <input type="email" placeholder="Email" class="bg-transparent border-none px-3 py-2 text-sm w-full outline-none text-white focus:ring-0">
-                        <button class="gradient-bg text-white px-4 rounded-md shadow-md"><i class="fas fa-arrow-right"></i></button>
+                    <p class="text-xs mb-4">Get latest AI hiring insights.</p>
+                    <div class="flex gap-2 p-1 bg-slate-800 rounded-xl border border-slate-700">
+                        <input type="email" placeholder="Email Address" class="bg-transparent border-none px-3 py-2 text-xs w-full outline-none text-white focus:ring-0">
+                        <button class="gradient-bg text-white px-4 py-2 rounded-lg shadow-md hover:scale-105 transition-all"><i class="fas fa-arrow-right"></i></button>
                     </div>
                 </div>
             </div>
-            <div class="pt-8 border-t border-slate-800 text-center text-xs">
+            <div class="pt-8 border-t border-slate-800 text-center text-[10px] uppercase font-bold tracking-[0.2em] text-slate-500">
                 © 2026 Ai Recruiter Inc. All rights reserved.
             </div>
         </div>
     </footer>
 
+
+    <!-- Scripts -->
     <script>
+        // Mobile Menu Logic
         const btn = document.getElementById('menu-btn');
         const menu = document.getElementById('mobile-menu');
         const icon = document.getElementById('menu-icon');
@@ -163,6 +166,17 @@
                 icon.classList.add('fa-bars');
             }
         });
+
+        // Auto-hide Toasts after 4 seconds
+        setTimeout(() => {
+            const toasts = document.querySelectorAll('.toast-notification');
+            toasts.forEach(toast => {
+                toast.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+                toast.style.opacity = "0";
+                toast.style.transform = "translateX(100px)";
+                setTimeout(() => toast.remove(), 600);
+            });
+        }, 4000);
     </script>
 </body>
 </html>

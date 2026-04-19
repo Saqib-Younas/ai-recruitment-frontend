@@ -1,5 +1,7 @@
-{% load static %}
+{% extends 'base.html' %} <!-- Hamesha Line 1 par -->
+      {% load static %}
 <!doctype html>
+{% block content %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -29,43 +31,6 @@
   </head>
   <body class="bg-slate-50 font-sans text-slate-900 min-h-screen">
     <!-- Aesthetic Header for Register -->
-    <nav
-      class="w-full bg-white/80 backdrop-blur-md border-b border-slate-100 py-3 px-8 flex justify-between items-center fixed top-0 z-50"
-    >
-      <a href="{% url 'home' %}" class="flex items-center gap-3 group">
-        <!-- Logo size decreased to w-12 h-12 -->
-        <div
-          class="w-12 h-12 group-hover:scale-110 transition-transform flex items-center justify-center"
-        >
-          <img
-            src="{% static 'images/logo.svg' %}"
-            alt="Logo"
-            class="w-full h-full object-contain"
-            onerror="
-              this.src =
-                'https://via.placeholder.com/48x48/2563eb/ffffff?text=AR'
-            "
-          />
-        </div>
-        <!-- Brand text decreased to text-2xl for balance -->
-        <span
-          class="text-2xl font-black gradient-text tracking-tighter uppercase leading-none"
-          >Ai Recruiter</span
-        >
-      </a>
-      <div class="flex items-center gap-4">
-        <span
-          class="hidden sm:inline text-sm font-medium text-slate-400 uppercase tracking-widest"
-          >Already a member?</span
-        >
-        <a
-          href="{% url 'login' %}"
-          class="secondary-btn px-6 py-2.5 rounded-full border border-slate-200 text-sm font-bold text-slate-700 shadow-sm flex items-center gap-2 hover:border-cyan-400 hover:text-cyan-600"
-        >
-          Login <i class="fas fa-arrow-right text-[10px]"></i>
-        </a>
-      </div>
-    </nav>
 
     <div class="flex items-center justify-center pt-32 pb-20 px-4">
       <div
@@ -195,3 +160,4 @@
     </div>
   </body>
 </html>
+{% endblock %}
